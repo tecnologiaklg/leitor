@@ -293,8 +293,8 @@ const App: React.FC = () => {
         </div>
       )}
 
-      {/* Permanent download help shortcut */}
-      <div style={{ textAlign: 'right', marginBottom: 'var(--space-2)' }}>
+      {/* Permanent download help shortcut - Centered with strong layout */}
+      <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 'var(--space-4)', marginTop: '-10px' }}>
         <button 
           onClick={() => {
             const isiOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
@@ -305,18 +305,21 @@ const App: React.FC = () => {
             }
           }}
           style={{
-            background: 'none',
-            border: 'none',
-            color: 'var(--color-primary)',
+            background: 'rgba(59, 130, 246, 0.1)',
+            border: '1px solid var(--color-primary)',
+            color: '#60a5fa',
+            borderRadius: '20px',
+            padding: '6px 16px',
             fontSize: 'var(--font-size-sm)',
             cursor: 'pointer',
-            textDecoration: 'underline',
             display: 'inline-flex',
             alignItems: 'center',
-            gap: '4px'
+            gap: '8px',
+            fontWeight: '600',
+            transition: 'all 0.2s'
           }}
         >
-          <span>📲</span> Como baixar como App
+          <span>📲</span> Instalar como Aplicativo (App)
         </button>
       </div>
 
