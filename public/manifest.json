@@ -1,0 +1,24 @@
+{
+  "name": "Leitor Estoque – Controle de Almoxarifado",
+  "short_name": "Leitor Estoque",
+  "description": "Leitor de código de barras e QR Code para controle de estoque. Escaneie produtos, vincule ao local e exporte em CSV/Excel.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#0f172a",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
