@@ -33,8 +33,10 @@ const ReportHistory: React.FC = () => {
     try {
       const data = await getRelatorios();
       setRelatorios(data || []);
-    } catch (error) {
-      showToast('Erro ao carregar relatórios. Verifique a conexão com o Supabase.', 'error', '❌');
+    } catch (error: any) {
+      const errorMsg = error?.message || JSON.stringify(error) || 'Erro desconhecido';
+      showToast(`Erro ao carregar: ${errorMsg}`, 'error', '❌');
+      console.error("Detalhes do erro:", error);
     } finally {
       setLoading(false);
     }
