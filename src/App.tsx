@@ -21,6 +21,44 @@ const App: React.FC = () => {
   // Auth state
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [isSaving, setIsSaving] = useState(false)
+  const [deferredPrompt, setDeferredPrompt] = useState<any>(null)
+  const [isInstallable, setIsInstallable] = useState(false)
+
+  // Listen for PWA installation prompt
+  React.useEffect(() => {
+    const handleBeforeInstallPrompt = (e: Event) => {
+      // Prevent the mini-infobar from appearing on mobile
+      e.preventDefault();
+      // Stash the event so it can be triggered later.
+      setDeferredPrompt(e);
+      // Update UI notify the user they can install the PWA
+      setIsInstallable(true);
+    };
+
+    window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+
+    // Check if already in standalone mode (installed)
+    if (window.matchMedia('(display-mode: standalone)').matches) {
+      setIsInstallable(false);
+    }
+
+    return () => {
+      window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+    };
+  }, []);
+
+  const handleInstallApp = async () => {
+    if (!deferredPrompt) return;
+    // Show the install prompt
+    deferredPrompt.prompt();
+    // Wait for the user to respond to the prompt
+    const { outcome } = await deferredPrompt.userChoice;
+    if (outcome === 'accepted') {
+      showToast('Obrigado por instalar o app!', 'success', '📲');
+      setIsInstallable(false);
+      setDeferredPrompt(null);
+    }
+  };
 
   // View state
   const [view, setView] = useState<'scanner' | 'history'>('scanner')
@@ -238,6 +276,22 @@ const App: React.FC = () => {
         <h1 className="header__title">Leitor Estoque</h1>
         <p className="header__subtitle">Controle de Almoxarifado</p>
       </header>
+
+      {/* PWA Install Banner */}
+      {isInstallable && (
+        <div className="card card--active" style={{ marginBottom: 'var(--space-4)', border: '2px dashed var(--color-success)', background: 'rgba(16, 185, 129, 0.05)' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-3)' }}>
+            <span style={{ fontSize: '2rem' }}>📲</span>
+            <div style={{ flex: 1 }}>
+              <h3 style={{ margin: 0, fontSize: 'var(--font-size-md)' }}>Instalar no Celular / PC</h3>
+              <p className="text-muted" style={{ margin: 0, fontSize: 'var(--font-size-sm)' }}>Acesse como um aplicativo nativo, direto da sua tela inicial!</p>
+            </div>
+            <button className="btn btn--success btn--sm" onClick={handleInstallApp}>
+              Baixar App
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* Navigation */}
       <div className="btn-group mb-4" style={{ display: 'flex', width: '100%', gap: 'var(--space-2)' }}>
