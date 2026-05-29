@@ -3,6 +3,7 @@ import { Html5Qrcode } from 'html5-qrcode'
 import { scanFeedback } from '../utils/feedback'
 
 interface ScannerProps {
+  id: string
   onScan: (result: string) => void
   label: string
   buttonIcon: string
@@ -11,9 +12,8 @@ interface ScannerProps {
   setScanning: (v: boolean) => void
 }
 
-const SCANNER_ELEMENT_ID = 'scanner-region'
-
 const Scanner: React.FC<ScannerProps> = ({
+  id,
   onScan,
   label,
   buttonIcon,
@@ -53,14 +53,14 @@ const Scanner: React.FC<ScannerProps> = ({
     // Small delay to ensure DOM element is ready
     await new Promise((r) => setTimeout(r, 100))
 
-    const element = document.getElementById(SCANNER_ELEMENT_ID)
+    const element = document.getElementById(id)
     if (!element) {
       setError('Elemento do scanner não encontrado')
       return
     }
 
     try {
-      const scanner = new Html5Qrcode(SCANNER_ELEMENT_ID)
+      const scanner = new Html5Qrcode(id)
       scannerRef.current = scanner
 
       setScanning(true)
@@ -112,7 +112,7 @@ const Scanner: React.FC<ScannerProps> = ({
         className="scanner-area"
         style={{ display: scanning ? 'block' : 'none' }}
       >
-        <div id={SCANNER_ELEMENT_ID} />
+        <div id={id} />
       </div>
 
       {error && (

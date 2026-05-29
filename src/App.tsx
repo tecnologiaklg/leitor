@@ -204,6 +204,7 @@ const App: React.FC = () => {
         </div>
 
         <Scanner
+          id="scanner-product"
           onScan={handleProductScan}
           label="Escanear Código"
           buttonIcon="📷"
@@ -243,6 +244,7 @@ const App: React.FC = () => {
         </div>
 
         <Scanner
+          id="scanner-lote"
           onScan={handleLoteScan}
           label="Escanear Lote"
           buttonIcon="🏷️"
@@ -331,6 +333,7 @@ const App: React.FC = () => {
             </div>
 
             <Scanner
+              id="scanner-local"
               onScan={handleLocalScan}
               label="Escanear Local"
               buttonIcon="📍"
