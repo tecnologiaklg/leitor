@@ -293,6 +293,33 @@ const App: React.FC = () => {
         </div>
       )}
 
+      {/* Permanent download help shortcut */}
+      <div style={{ textAlign: 'right', marginBottom: 'var(--space-2)' }}>
+        <button 
+          onClick={() => {
+            const isiOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+            if (isiOS) {
+              alert('Para instalar no iPhone/Safari:\n1. Clique no botão de compartilhar (ícone de seta pra cima na barra do navegador)\n2. Selecione "Adicionar à Tela de Início"\n3. Clique em Adicionar no canto superior.');
+            } else {
+              alert('Para instalar no Android/Chrome/PC:\n1. Clique nos três pontinhos no canto superior do navegador\n2. Selecione "Instalar aplicativo" ou "Adicionar à tela inicial"');
+            }
+          }}
+          style={{
+            background: 'none',
+            border: 'none',
+            color: 'var(--color-primary)',
+            fontSize: 'var(--font-size-sm)',
+            cursor: 'pointer',
+            textDecoration: 'underline',
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '4px'
+          }}
+        >
+          <span>📲</span> Como baixar como App
+        </button>
+      </div>
+
       {/* Navigation */}
       <div className="btn-group mb-4" style={{ display: 'flex', width: '100%', gap: 'var(--space-2)' }}>
         <button 
