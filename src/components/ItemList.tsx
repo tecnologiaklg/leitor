@@ -78,6 +78,12 @@ const ItemList: React.FC<ItemListProps> = ({ items, onRemoveItem }) => {
             </div>
 
             <div className="item-card__row">
+              <span className="item-card__icon">🔢</span>
+              <span className="item-card__label">Qtd</span>
+              <span className="item-card__value">{item.quantidade}</span>
+            </div>
+
+            <div className="item-card__row">
               <span className="item-card__icon">📍</span>
               <span className="item-card__label">Local</span>
               <span className="item-card__value">{item.local}</span>

@@ -2,6 +2,7 @@ export interface StockItem {
   id: string
   codigo: string
   lote: string
+  quantidade: number
   local: string
   dataHora: string
 }
